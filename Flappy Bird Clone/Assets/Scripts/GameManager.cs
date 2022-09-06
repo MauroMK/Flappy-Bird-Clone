@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int totalScore;
+
+    public Text textScore;
+
+    public static GameManager instance;
+
     void Start()
+    {
+        instance = this;
+    }
+    
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowGameOver()
     {
-        
+        Debug.Log("Game Over");
     }
 }
