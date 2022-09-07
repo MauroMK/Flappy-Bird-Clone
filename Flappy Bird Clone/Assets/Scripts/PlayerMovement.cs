@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D playerRig;
 
+    public GameObject GameOver;
+
     void Start()
     {
         playerRig = GetComponent<Rigidbody2D>();
@@ -33,16 +35,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Tube")
-        {
-            GameManager.instance.ShowGameOver();
-            FindObjectOfType<GameManager>().ShowGameOver();
-        } 
-        else if (other.gameObject.tag == "Scoring")
-        {
-            FindObjectOfType<GameManager>().IncreaseScore();
-        }
+        GameOver.SetActive(true);
+        Time.timeScale = 0;
     }
 }
