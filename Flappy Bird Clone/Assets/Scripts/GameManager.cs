@@ -6,20 +6,35 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int totalScore;
+    private int totalScore;
 
-    public Text textScore;
+    public Text scoreText;
 
-    public static GameManager instance;
+    public GameObject playButton;
+    public GameObject gameOver;
 
-    void Start()
+    public PlayerMovement player;
+
+    private void Awake()
     {
-        instance = this;
+        Application.targetFrameRate = 60;
+
+        Pause();
     }
-    
-    void Update()
+
+    public void Play()
     {
         
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void IncreaseScore()
+    {
+        totalScore++;
     }
 
     public void ShowGameOver()

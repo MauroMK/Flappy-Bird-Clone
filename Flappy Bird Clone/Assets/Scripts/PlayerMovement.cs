@@ -20,13 +20,28 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+
+        // If in mobile
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                playerRig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+        }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Tube")
+        if (other.gameObject.tag == "Tube")
         {
-            Destroy(gameObject);
+            FindObjectOfType<GameManager>().ShowGameOver();
+        } 
+        else if (other.gameObject.tag == "Scoring")
+        {
+            FindObjectOfType<GameManager>().IncreaseScore();
         }
     }
 }
