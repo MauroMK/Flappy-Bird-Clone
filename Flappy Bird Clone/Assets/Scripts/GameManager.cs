@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private int totalScore;
+    public int totalScore;
 
     public Text scoreText;
 
@@ -15,30 +15,52 @@ public class GameManager : MonoBehaviour
 
     public PlayerMovement player;
 
-    private void Awake()
+    public static GameManager instance;
+
+    public void Awake()
     {
+        instance = this;
         Application.targetFrameRate = 60;
 
         Pause();
     }
 
+    public void Start()
+    {
+        instance = this;
+    }
+
     public void Play()
     {
         
+        totalScore = 0;
+        scoreText.text = scoreText.ToString();
+
+        playButton.SetActive(false);
+        gameObject.SetActive(false);
+
+        Time.timeScale = 1f;
+        player.enabled = true;
     }
 
     public void Pause()
     {
         Time.timeScale = 0f;
+        player.enabled = false;
+        
     }
 
     public void IncreaseScore()
     {
         totalScore++;
+        scoreText.text = scoreText.ToString();
     }
 
     public void ShowGameOver()
     {
-        Debug.Log("Game Over");
+        gameObject.SetActive(true);
+        playButton.SetActive(true);
+
+        Pause();
     }
 }

@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Tube")
         {
+            GameManager.instance.ShowGameOver();
             FindObjectOfType<GameManager>().ShowGameOver();
         } 
         else if (other.gameObject.tag == "Scoring")
