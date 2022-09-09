@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float jumpForce;
+    private const float jumpForce = 10f;
 
-    public Rigidbody2D playerRig;
+    private Rigidbody2D playerRig;
 
     public GameObject GameOver;
 
-    void Start()
+    void Awake()
     {
         playerRig = GetComponent<Rigidbody2D>();
     }
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
         {
-            playerRig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            Jump();
         }
 
         // If in mobile
@@ -30,9 +30,14 @@ public class PlayerMovement : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                playerRig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                Jump();
             }
         }
+    }
+
+    public void Jump()
+    {
+        playerRig.velocity = Vector2.up * jumpForce;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
