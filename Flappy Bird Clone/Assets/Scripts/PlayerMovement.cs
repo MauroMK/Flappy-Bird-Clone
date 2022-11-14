@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     private const float jumpForce = 9f;
-
     private Rigidbody2D playerRig;
+    private State state;
 
     public GameObject GameOver;
 
-    private State state;
+    [SerializeField] GameObject spawnManager;
 
     private enum State {
         WaitingToStart,
@@ -32,38 +31,19 @@ public class PlayerMovement : MonoBehaviour
         {
             default:
             case State.WaitingToStart:
+                spawnManager.SetActive(false);
                 if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
                 {
                     state = State.Playing;
                     playerRig.bodyType = RigidbodyType2D.Dynamic;
                     Jump();
                 }
-                // If in mobile
-                if (Input.touchCount > 0)
-                {
-                    Touch touch = Input.GetTouch(0);
-
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        Jump();
-                    }
-                }
                 break;
             case State.Playing:
+                spawnManager.SetActive(true);
                 if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
                 {
                     Jump();
-                }
-
-                // If in mobile
-                if (Input.touchCount > 0)
-                {
-                    Touch touch = Input.GetTouch(0);
-
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        Jump();
-                    }
                 }
                 break;
             case State.Dead:

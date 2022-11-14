@@ -4,17 +4,9 @@ using UnityEngine;
 
 public class MoveLeftX : MonoBehaviour
 {
-
     public float speed;
     private float leftBound = -15;
 
-    void Start()
-    {
-        // Está sendo setado neste script que: a variável playerControllerScript nada mais é do que o PlayerController.cs
-        // Ou seja, está fazendo uma referência
-    }
-
-    
     void Update()
     {
         transform.Translate(Vector3.left * Time.deltaTime * speed);

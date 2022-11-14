@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Points : MonoBehaviour
 {
-    
-    GameManager manager; //puxando la do game manager
+    private GameManager manager;
 
     void Start()
     {
