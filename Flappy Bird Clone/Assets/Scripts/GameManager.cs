@@ -6,25 +6,45 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int score;
-    public Text scoreText;
     public static GameManager instance;
+    
+    [Header("Values")]
+    public int score;
+    
+    [Header("References")]
+    public Text scoreText;
     public GameObject gameOver;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     public void Start()
     {
-        instance = this;
         Time.timeScale = 1;
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ShowGameOver()
     {
         gameOver.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public void ShowPauseMenu()
+    {
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }
