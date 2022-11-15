@@ -8,8 +8,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRig;
     private State state;
 
-    public GameObject GameOver;
-
     [SerializeField] GameObject spawnManager;
 
     private enum State {
@@ -58,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        GameOver.SetActive(true);
+        GameManager.instance.ShowGameOver();
         Time.timeScale = 0;
     }
 }
