@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveLeftX : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] private float speed;
     private float leftBound = -15;
 
     void Update()
