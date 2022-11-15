@@ -49,8 +49,6 @@ public class PlayerMovement : MonoBehaviour
             case State.Dead:
                 break;
         }
-
-        
     }
 
     public void Jump()
