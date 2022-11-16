@@ -6,9 +6,9 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject tubePrefab;
 
-    private float spawnRate = 1f;
-    private float minHeight = -0.25f;
-    private float maxHeight = 1.8f;
+    private float spawnRate = 0.8f;
+    private float minHeight = -0.8f;
+    private float maxHeight = 2.4f;
 
     private void OnEnable()
     {

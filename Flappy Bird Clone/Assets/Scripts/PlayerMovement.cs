@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
                 {
                     Jump();
                 }
+
+                transform.eulerAngles = new Vector3(0, 0, playerRig.velocity.y * 0.5f);
                 break;
             case State.Dead:
                 break;
