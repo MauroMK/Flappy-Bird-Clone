@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -30,8 +31,9 @@ public class PlayerMovement : MonoBehaviour
             default:
             case State.WaitingToStart:
                 spawnManager.SetActive(false);
-                if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                 {
+                    if (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject) return;
                     state = State.Playing;
                     playerRig.bodyType = RigidbodyType2D.Dynamic;
                     Jump();
@@ -39,8 +41,9 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case State.Playing:
                 spawnManager.SetActive(true);
-                if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                 {
+                    if (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject) return;
                     Jump();
                 }
 
