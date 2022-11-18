@@ -9,7 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRig;
     private State state;
 
+    #region Serielized
     [SerializeField] GameObject spawnManager;
+    [SerializeField] GameObject touchText;
+    [SerializeField] GameObject scoreText;
+    [SerializeField] GameObject pauseButton;
+    #endregion
 
     private enum State {
         WaitingToStart,
@@ -30,20 +35,26 @@ public class PlayerMovement : MonoBehaviour
         {
             default:
             case State.WaitingToStart:
+                touchText.SetActive(true);
+                scoreText.SetActive(false);
+                pauseButton.SetActive(false);
                 spawnManager.SetActive(false);
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject) return;
+                    if (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject) return; // Prevents the player from jumping when pressing the pause button
                     state = State.Playing;
                     playerRig.bodyType = RigidbodyType2D.Dynamic;
                     Jump();
                 }
                 break;
             case State.Playing:
+                touchText.SetActive(false);
+                scoreText.SetActive(true);
+                pauseButton.SetActive(true);
                 spawnManager.SetActive(true);
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject) return;
+                    if (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject) return; // Prevents the player from jumping when pressing the pause button
                     Jump();
                 }
 
